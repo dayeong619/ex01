@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.BoardMapper">
+	<insert id="create">
+		INSERT INTO tbl_board (title, content, writer)
+		VALUES(#{title}, #{content}, #{writer})
+	</insert>
+	
+	<select id="read" resultType="BoardVO">
+		select * from tbl_board where bno = #{bno}
+	</select>
+	
+	<select id="listAll" resultType="BoardVO">
+		select * from tbl_board
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM tbl_board
+		WHERE bno = #{bno}
+	</delete>
+	
+	<update id="modify">
+		UPDATE tbl_board
+		SET title=#{title}, content=#{content}, regdate=CURRENT_TIMESTAMP
+		WHERE bno=#{bno}
+	</update>
+	
+	<update id="viewCount">
+		update tbl_board
+		set viewcnt=#{viewcnt}
+		where bno=#{bno}
+	</update>
+	
+	<select id="listPage" resultType="BoardVO">
+		select * from tbl_board
+		order by bno desc 
+		limit #{page}, 10 
+	</select>
+	
+	<select id="listCriteria" resultType="BoardVO">
+		select * from tbl_board
+		order by bno desc 
+		limit #{pageStart}, #{perPageNum} 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
