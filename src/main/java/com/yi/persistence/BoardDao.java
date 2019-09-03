@@ -11,10 +11,10 @@ public interface BoardDao {
 	public List<BoardVO> listAll() throws Exception;
 	public BoardVO delete(int bno) throws Exception;
 	public void modify(BoardVO vo) throws Exception;
-//	public void viewCount() throws Exception;
+	public void viewCount(int bno) throws Exception;
 	
 	public List<BoardVO> listPage(int page) throws Exception;
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
-	
+	public int countPaging() throws Exception;
 	
 }

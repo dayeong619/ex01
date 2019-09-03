@@ -45,5 +45,16 @@ public class BoardServiceImple implements BoardService { //dao에 있는 함수 
 		return dao.listCriteria(cri);
 	}
 
+	@Override
+	public void viewCount(int bno) throws Exception {
+		dao.viewCount(bno);
+	}
+
+	@Override
+	public int listcountCriteria() throws Exception {
+		return dao.countPaging();
+	}
+
+	
 	
 }

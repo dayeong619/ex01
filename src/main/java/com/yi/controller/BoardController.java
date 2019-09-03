@@ -96,7 +96,7 @@ public class BoardController {
 		
 		PageMaker pm = new PageMaker();
 		pm.setCri(cri); //criteria 필요함 그래서 위에꺼 다시 넣어줌.
-		pm.setTotalCount(4096);
+		pm.setTotalCount(service.listcountCriteria());
 		model.addAttribute("pageMaker", pm); //하단 페이지 갯수
 	}
 	
@@ -105,7 +105,6 @@ public class BoardController {
 		logger.info("----- readPage GET");
 		logger.info("---- readPage GET에 bno"+bno);
 		BoardVO vo = service.read(bno);
-		
 		model.addAttribute("board", vo); //컨트롤러에서의 내용을 jsp에 보여줄때 모델이 필요해
 		model.addAttribute("cri", cri); // go list눌러도 그 페이지 되도록
 	}

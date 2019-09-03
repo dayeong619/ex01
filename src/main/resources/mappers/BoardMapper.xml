@@ -29,7 +29,7 @@
 	
 	<update id="viewCount">
 		update tbl_board
-		set viewcnt=#{viewcnt}
+		set viewcnt=viewcnt+1
 		where bno=#{bno}
 	</update>
 	
@@ -45,6 +45,9 @@
 		limit #{pageStart}, #{perPageNum} 
 	</select>
 	
+	<select id="countPaging" resultType="int">
+		select count(bno) from tbl_board
+	</select>
 </mapper>
 
 

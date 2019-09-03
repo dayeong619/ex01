@@ -52,4 +52,14 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(namespace+".listCriteria", cri);
 	}
 
+	@Override
+	public void viewCount(int bno) throws Exception {
+		sqlSession.update(namespace+".viewCount", bno);		
+	}
+
+	@Override
+	public int countPaging() throws Exception {
+		return sqlSession.selectOne(namespace+".countPaging");
+	}
+
 }

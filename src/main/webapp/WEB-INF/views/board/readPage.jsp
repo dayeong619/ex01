@@ -10,7 +10,6 @@
 						READ PAGE
 					</h3>
 				</div>
-				
 					<!-- box-body -->
 					<div class="box-body">
 						<!-- post로 삭제하는법 -->

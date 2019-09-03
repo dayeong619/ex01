@@ -11,7 +11,7 @@ public interface BoardService {
 	public BoardVO read(int bno) throws Exception;
 	public BoardVO delete(int bno) throws Exception;
 	public void modify(BoardVO vo) throws Exception;
-	
+	public void viewCount(int bno) throws Exception;
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
-	
+	public int listcountCriteria() throws Exception;
 }
