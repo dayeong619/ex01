@@ -48,6 +48,41 @@
 	<select id="countPaging" resultType="int">
 		select count(bno) from tbl_board
 	</select>
+	
+	<sql id="search">
+		<if test="searchType=='t'.toString()">
+			where title like CONCAT('%', #{keyword}, '%') <!-- 컬럼이 타이틀인데 앞뒤로 뭐가 있든 keyword 들어가는지  -->
+		</if>
+		<if test="searchType=='c'.toString()">
+			where content like CONCAT('%', #{keyword}, '%') 
+		</if>
+		<if test="searchType=='w'.toString()">
+			where writer like CONCAT('%', #{keyword}, '%') 
+		</if>
+		<if test="searchType=='tc'.toString()">
+			where title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%') 
+		</if>
+		<if test="searchType=='cw'.toString()">
+			where content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%') 
+		</if>
+		<if test="searchType=='tcw'.toString()">
+			where title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%') 
+		</if>
+	</sql>
+	<select id="listSearch" resultType="BoardVO"><!-- 페이지도 찾고 검색도 되도록  -->
+		select * from tbl_board
+		<include refid="search"></include>
+		order by bno desc 
+		limit #{pageStart}, #{perPageNum} 
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+		select count(bno) from tbl_board
+		<include refid="search"></include><!-- 검색했을 때 페이징처리 -->
+	</select>
+	
+	
+	
 </mapper>
 
 

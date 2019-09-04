@@ -9,9 +9,10 @@
 			<div class="box">
 				<div class="box-header with-border">
 					<h3 class="box-title">Search Board</h3>
+					
 				</div>
 				<div class="box-body">
-					<select>
+					<select name="searchType">
 						<option value="n" ${cri.searchType == null?"selected":"" }>ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ</option>
 						<option value="t" ${cri.searchType == "t"?"selected":"" }>Title</option>
 						<option value="c" ${cri.searchType == "c"?"selected":"" }>Content</option>
@@ -22,6 +23,7 @@
 					</select>
 					<input type="text" id="keywordInput" name="keyword" value="${cri.keyword }">
 					<button id="btnSearch">Search</button>
+					<button id="btnAllView">All</button>
 					<button id="btnAdd">New Board</button>
 				</div>
 			</div>
@@ -44,7 +46,7 @@
 						<c:forEach var="board" items="${list }">
 							<tr>
 								<td>${board.bno }</td>
-								<td><a href="readPage?bno=${board.bno}&page=${pageMaker.cri.page}">${board.title }</a></td>
+								<td><a href="readPage?bno=${board.bno}&page=${pageMaker.cri.page}&searchType=${cri.searchType}&keyword=${cri.keyword}">${board.title }</a></td>
 								<td>${board.writer }</td>
 								<td><fmt:formatDate value="${board.regdate }" pattern="yyyy-MM-dd HH:mm"/></td>
 								<td><span class="badge bg-red">${board.viewcnt }</span></td>
@@ -57,13 +59,14 @@
 					<div class="text-center">
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev }"><!-- 이전페이지 -->
-								<li><a href="listPage?page=${pageMaker.startPage-1 }"> &laquo; </a></li>
+								<li><a href="list?page=${pageMaker.startPage-1 }&searchType=${cri.searchType}&keyword=${cri.keyword}"> &laquo; </a></li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-								<li ${pageMaker.cri.page == idx?"class='active'":"" }><a href="listPage?page=${idx }">${idx }</a></li>
+							<!-- searchType, keyword 계속 다지고 다니게 수정함 -->
+								<li ${pageMaker.cri.page == idx?"class='active'":"" }><a href="list?page=${idx }&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a></li>
 							</c:forEach>
 							<c:if test="${pageMaker.next }"><!-- 다음페이지 -->
-								<li><a href="listPage?page=${pageMaker.endPage+1 }"> &raquo; </a></li>
+								<li><a href="list?page=${pageMaker.endPage+1 }&searchType=${cri.searchType}&keyword=${cri.keyword}"> &raquo; </a></li>
 							</c:if>
 							 <!-- a태그: 누를때마다 그 페이지의 번호가 인덱스로 전달됨 -->
 							 <!-- 누를때마다 css변하게. pageMaker에 cri가 있어서 그 크리랑 인덱스랑 비교해서 있으면 클래스active적용되게 없으면 클래스없음 -->
@@ -75,7 +78,22 @@
 	</div>
 </section>	
 <%@ include file="../include/footer.jsp" %>
-
+<script>
+	$("#btnSearch").click(function(){
+		var select = $("select[name='searchType']").val();
+		var keyword = $("input[name='keyword']").val();
+		
+		location.href = "list?page="+${cri.page}+"&searchType="+select+"&keyword="+keyword;
+				
+	})
+	
+	$("#btnAdd").click(function(){
+		location.href = "register";
+	})
+	
+	
+	
+</script>
 
 
 
