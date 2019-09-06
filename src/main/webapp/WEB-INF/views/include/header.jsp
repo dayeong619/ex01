@@ -29,7 +29,7 @@
   </head>
       <!-- jQuery 2.1.4 -->
     <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.min.js"></script>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yi.domain.BoardVO;
 import com.yi.domain.Criteria;
 import com.yi.domain.PageMaker;
+import com.yi.domain.ReplyVO;
 import com.yi.service.BoardService;
 
 @RequestMapping("/board/*")
