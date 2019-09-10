@@ -81,7 +81,9 @@
 		<include refid="search"></include><!-- 검색했을 때 페이징처리 -->
 	</select>
 	
-	
+	<update id="updateReplyCnt">
+		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+	</update>
 	
 </mapper>
 

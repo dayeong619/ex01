@@ -62,7 +62,7 @@
 			</div>
 			<ul class="timeline">
 				<li class="time-label" id="btnReplyList">
-					<span class="bg-green">Replies List</span>
+					<span class="bg-green">Replies List <span id="cncncn">[${board.replycnt}]</span></span>
 				</li>
 			</ul>
 			<div class="text-center">
@@ -216,6 +216,9 @@
 						$("#newReplyWriter").val("");
 						$("#newReplyText").val("");
 						getListAll(1);
+						var vv = $("#cncncn").text(); //약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약약
+						var kk = vv+1
+						$("#cncncn").text(kk);
 					}
 				}
 			})

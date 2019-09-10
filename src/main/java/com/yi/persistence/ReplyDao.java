@@ -13,4 +13,5 @@ public interface ReplyDao {
 	
 	public List<ReplyVO> listPage(int bno, Criteria cri) throws Exception; //댓글 페이지 번호
 	public void totalCount(int bno) throws Exception;
+	public int getBno(int rno) throws Exception;
 }
