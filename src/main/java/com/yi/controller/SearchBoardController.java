@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yi.domain.BoardVO;
@@ -29,7 +30,7 @@ public class SearchBoardController {
 	@RequestMapping(value="list", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri")SearchCriteria cri, Model model) throws Exception {
 		//@ModelAttribute("cri")SearchCriteria cri -> model.addAttribute("cri", value);
-		logger.info("-> list");
+		logger.info("-> list GET");
 		
 		List<BoardVO> list = service.listSearch(cri);
 		model.addAttribute("list", list); //상단 list부분임
@@ -85,10 +86,15 @@ public class SearchBoardController {
 	}
 	
 	@RequestMapping(value="register", method=RequestMethod.POST)
-	public String registerPOST(BoardVO vo) throws Exception { 
+	public String registerPOST(BoardVO vo, List<MultipartFile>files) throws Exception { 
 		logger.info("----- registerPOST");
 		logger.info(vo.toString());
 
+		for(MultipartFile file : files) {
+			logger.info("file name : "+file.getOriginalFilename());
+			logger.info("file name : "+file.getSize());
+		}
+		
 		service.regist(vo);
 		return "redirect:/sboard/list"; //jsp가 아닌 controller로 바로감!(화면에 그리지 않고 바로 요청함)
 	}
