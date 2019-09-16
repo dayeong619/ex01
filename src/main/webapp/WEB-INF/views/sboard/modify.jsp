@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ include file="../include/header.jsp" %>
 <section class="content">
 	<div class="row">
@@ -11,7 +12,7 @@
 					</h3>
 				</div>
 				
-				<form action="modify" method="post" role="form">
+				<form action="modify" method="post" role="form" enctype="multipart/form-data">
 					<!-- box-body -->
 					<div class="box-body">
 						<div class="form-group">
@@ -30,6 +31,22 @@
 							<label>Writer</label>
 							<input type="text" name="Writer" class="form-control" value="${board.writer}" readonly="readonly">
 						</div>
+						<div class="form-group">
+							<label>Writer</label>
+							<input type="text" name="Writer" class="form-control" value="${board.writer}" readonly="readonly">
+						</div>
+						<div class="form-group">
+							<label>Add file</label>
+							<input type="file" name="imgfiles" class="form-control">
+						</div>
+						<div class="form-group uploadDiv"><!-- 사진에 X표시되도록 -->
+							<c:forEach var="file" items="${board.files }">
+								<div class="item">
+									<img src="displayFile?filename=${file }">
+									<button type="button" class="btnDel" data-src="${file }">X</button>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
 					<!-- box-footer -->
 					<div class="box-footer">
@@ -43,8 +60,20 @@
 </section>	
 <%@ include file="../include/footer.jsp" %>
 <script>
-$("#submitCancle").click(function(){
-	location.href="${pageContext.request.contextPath}/sboard/readPage?bno=${board.bno}&page="+${cri.page}+"&searchType="+${cri.searchType}+"&keyword="+${cri.keyword};
-})
-
+	/* $("#submitCancle").click(function(){
+		location.href="${pageContext.request.contextPath}/sboard/readPage?bno=${board.bno}&page=
+			"+${cri.page}+"&searchType="+${cri.searchType}+"&keyword="+${cri.keyword};
+	}) */
+	$(document).ready(function(){
+		$(".btnDel").click(function(){
+			var $this = $(this);
+			$this.parent(".item").hide();
+			var $input = $("<input>").attr("type","hidden").attr("name","delFiles").attr("value", $(this).attr("data-src"));
+			$(".uploadDiv").append($input);
+			
+			
+			
+		})
+	});
+	
 </script>

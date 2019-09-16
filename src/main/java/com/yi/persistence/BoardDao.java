@@ -21,4 +21,12 @@ public interface BoardDao {
 	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	public void updateReplyCnt(int amount, int bno) throws Exception;
+	
+	public void addAttach(String fullName) throws Exception;
+	public List<String> getAttach(int bno) throws Exception;
+	public void deleteAttach(int bno) throws Exception;
+	public void deleteAttachByFullName(int bno, String fullname) throws Exception;
+	public void addAttachByBno(String fullName, int bno) throws Exception;
+	
+	
 }

@@ -85,6 +85,23 @@
 		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
 	</update>
 	
+	<insert id="addAttach">
+   		insert into tbl_attach(fullName, bno ) values (#{fullName}, LAST_INSERT_ID())
+   	</insert>
+   
+  	<select id="getAttach" resultType="String">
+   		select fullName from tbl_attach where bno = #{bno}
+  	</select>
+	
+	<delete id="deleteAttach">
+		delete from tbl_attach where bno=#{bno}
+	</delete>
+	<delete id="deleteAttachByFullName">
+		delete from tbl_attach where bno=#{bno} and fullname = #{fullname}
+	</delete>
+	<insert id="addAttachByBno">
+   		insert into tbl_attach(fullName, bno ) values (#{fullName}, #{bno})
+   	</insert>
 </mapper>
 
 

@@ -71,6 +71,15 @@ public class UploadFileUtils {
 		return thumbnailName.substring(uploadPath.length());
 	}
 	
+	public static void deleteFile(String uploadPath, String filename) { //static해야 함수호출 바로 할수있음.
+		File file = new File(uploadPath+filename); //작은파일만 지움. 
+		file.delete();
+		
+		//원본 파일 삭제해야함.
+		String originFileName = filename.substring(0,12) + filename.substring(14); //중간에 s_ 빼는것임.
+		File file2 = new File(uploadPath+originFileName);
+		file2.delete();
+	}
 }
 
 
