@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-group">
 							<label>Writer</label>
-							<input type="text" name="Writer" class="form-control" placeholder="Enter Writer">
+							<input type="text" name="Writer" class="form-control" placeholder="Enter Writer" readonly="readonly" value="${Auth.userid }">
 						</div>
 						<div class="form-group">
 							<label>Files</label>

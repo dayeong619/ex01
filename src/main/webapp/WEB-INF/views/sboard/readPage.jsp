@@ -59,8 +59,10 @@
 					</div>
 					<!-- box-footer -->
 					<div class="box-footer">
-						<button class="btn btn-warning" id="modify">Modify</button>
-						<button class="btn btn-danger" id="remove">Remove</button>
+						<c:if test="${board.writer == Auth.userid}">
+							<button class="btn btn-warning" id="modify">Modify</button>
+							<button class="btn btn-danger" id="remove">Remove</button>
+						</c:if>
 						<button class="btn btn-primary" id="list">Go List</button>
 					</div>
 			</div>
@@ -74,7 +76,7 @@
 				</div>
 				<div class="box-body">
 					<label>Writer</label>
-					<input type="text" placeholder="user id" class="form-control" id="newReplyWriter">
+					<input type="text" placeholder="user id" class="form-control" id="newReplyWriter" readonly="readonly" value="${Auth.userid }">
 					<label>Reply Text</label>
 					<input type="text" placeholder="text" class="form-control" id="newReplyText">
 				</div>
@@ -123,16 +125,27 @@
 				<strong>{{rno}}</strong> -{{replyer}}
 			</h3>
 			<div class="timeline-body">{{replytext}}</div>
+			{{#if replyer}}
 			<div class="timeline-footer">
 				<a class="btn btn-warning btn-xs btnReplyModify" data-toggle="modal" data-target="#modifyModal">Modify</a>
 				<a class="btn btn-danger btn-xs btnReplyDelete" data-rno="{{rno}}">Delete</a>
 			</div>
+			{{/if}}
 		</div>
 	</li>
 	{{/each}}
 	</script>
 	
 	<script>
+	//if문을 사용시, options는 항상 있는 매개변수임.
+	//if 헬퍼 사이의 구문 통채로 options 매개변수에 넘어옴.
+	Handlebars.registerHelper("if", function(replyer, options){
+		if(replyer == '${Auth.userid}'){
+			return options.fn(this);
+		}else{
+			return ''; //빈 글자만 return 
+		}
+	})
 	
 	Handlebars.registerHelper("tempdate", function(time){ //replydate값이 time에 하나씩 들어옴
 		var date = new Date(time);

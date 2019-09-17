@@ -28,6 +28,20 @@
 	</beans:bean>
 	<context:component-scan base-package="com.yi.controller" />
 	
-	
+	<beans:bean id="LoginInterceptor" class="com.yi.interceptor.LoginInterceptor"/>
+	<beans:bean id="authInterceptor" class="com.yi.interceptor.AuthInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<mapping path="/auth/loginPost"/>
+			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/sboard/register"/>
+			<mapping path="/sboard/readPage"/>
+			<mapping path="/sboard/modify"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		
+	</interceptors>
 	
 </beans:beans>
