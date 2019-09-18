@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,17 @@
 		</div>
 	</div>
 
+<c:if test="${error == 'notMatch' }">
+	<script>
+		setTimeout(function(){
+			alert("실패");
+		}, 100); 
+	
+	</script>
+	<%
+		session.removeAttribute("error");
+	%> 
+</c:if>
 
 
 

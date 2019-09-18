@@ -31,7 +31,7 @@ public class LoginController {
 		logger.info("----- loginPOST, mvo는 "+mvo);
 		MemberVO dbMember = service.selectMemberByIdAndPw(mvo.getUserid(), mvo.getUserpw());
 		
-		if(dbMember == null) {
+		if(dbMember == null) {//회원이 없으면 dto 안 만든당.
 			logger.info("loginPost -> login fail, not member");
 			return ;
 		}
